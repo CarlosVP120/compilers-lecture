@@ -7,9 +7,9 @@
 %option noinput
 
 %%
-f                       { printf("floatdcl "); }
-i                       { printf("intdcl "); }
 p                       { printf("print "); }
+i                       { printf("intdcl "); }
+f                       { printf("floatdcl "); }
 "+"                     { printf("plus "); }
 "-"                     { printf("minus "); }
 =                       { printf("assign "); }
