@@ -1,26 +1,79 @@
-# Lab 04 instructions
+# Manual de Usuario - Analizador Léxico para Lenguaje AC
 
-## Objective
+# A01641147 - Carlos Alberto Veryan Peña
 
-Make the student understand the power of lex language making a C code that
-performs the lexical analysis of the ac src program
+## Descripción
 
-# Requirements
+Este proyecto implementa un analizador léxico para el lenguaje AC. El analizador léxico identifica y clasifica los elementos del código fuente AC en tokens predefinidos como palabras clave, identificadores, operadores, etc.
 
-* Linux machine, either a VM or a bare metal host
-* GCC compiler (at least version 4.8)
-* lex compiler
-* Autotools
-* git send mail server installed and configured on your Linux machine
+## Requisitos del Sistema
 
-## Instructions
+- Sistema operativo Linux (o macOS)
+- Compilador GCC (versión 4.8 o superior)
+- Flex (analizador léxico)
+- Python 3 (para generar código aleatorio)
 
-Please generate a LEX code to parse the previous example of lab 03.
+## Instalación
 
-A valid line of code in ac could be:
+1. Clone o descargue este repositorio en su máquina local.
+2. Navegue hasta el directorio del proyecto.
+3. Compile el analizador usando el comando `make`.
 
 ```
-// basic code
+$ make
+```
+
+## Uso
+
+### Ejecución del Analizador Léxico
+
+Para analizar un archivo AC:
+
+```
+$ ./lex_analaizer archivo.ac
+```
+
+Donde `archivo.ac` es el archivo que contiene el código AC a analizar.
+
+### Generación de Código AC Aleatorio
+
+El proyecto incluye un generador de código AC aleatorio que puede ser utilizado para pruebas:
+
+```
+$ python3 code_generator.py > ejemplo.ac
+```
+
+Este comando generará un archivo `ejemplo.ac` con código AC aleatorio.
+
+### Ejemplo Rápido
+
+Puede utilizar el objetivo `test` en el Makefile para generar código aleatorio y analizarlo:
+
+```
+$ make test
+```
+
+## Tokens Reconocidos
+
+El analizador léxico identifica los siguientes tokens:
+
+- `COMMENT` - Comentarios (líneas que comienzan con `//`)
+- `floatdcl id` - Declaración de variables de punto flotante (líneas que comienzan con `f`)
+- `intdcl id` - Declaración de variables enteras (líneas que comienzan con `i`)
+- `print id` - Instrucciones de impresión (líneas que comienzan con `p`)
+- `id` - Identificadores (nombres de variables)
+- `assign` - Operador de asignación (`=`)
+- `plus` - Operador de suma (`+`)
+- `minus` - Operador de resta (`-`)
+- `times` - Operador de multiplicación (`*`)
+- `div` - Operador de división (`/`)
+- `inum` - Números enteros
+- `fnum` - Números de punto flotante
+
+## Ejemplo de Código AC
+
+```
+// comentario básico
 
 //float b
 f b
@@ -38,58 +91,33 @@ b = a + 3.2
 p b
 ```
 
-Your output should be
+## Ejemplo de Salida del Analizador
+
+Para el código anterior, la salida será:
 
 ```
 COMMENT
+
 COMMENT
 floatdcl id
+
 COMMENT
 intdcl id
+
 COMMENT
 id assign inum
+
 COMMENT
 id assign id plus fnum
+
 COMMENT
 print id
 ```
 
-## Expected result:
+## Limpieza
 
-* Code a lex_analaizer.L that fulfill the requirements
-* Generate a random AC code with:
-
-```
-python3 code_generator.py > example.ac
+Para limpiar los archivos generados:
 
 ```
-
-* Compile your code with the makefile and execute as follows:
-
+$ make clean
 ```
-./lex_analaizer example.ac
-```
-
-
-## Please send the mail as PR:
-
-```
-    $ git add lex_analaizer.l
-    $ git commit -s -m <STUDENT-ID>-homework-04
-```
-Do some tests sending the mail to your personal account, if you get the mail,
-then you can be sure I will get the mail
-
-## Good links for Hints
-
-* [lextutorial](https://ds9a.nl/lex-yacc/cvs/lex-yacc-howto.html)
-* [lex & yacc Second
-Edition](https://www.amazon.com/lex-yacc-Doug-Brown/dp/1565920007)
-At the end of chapter 1 there is a very similar code as the one requested in
-this homework, you just need to read chapter 1 of this book :)
-* [useoflexinc](https://www.quora.com/What-is-the-function-of-yylex-yyin-yyout-and-fclose-yyout-in-LEX)
-
-## Time to do the homework:
-
-One week from the moment the mail is sent to students
-
